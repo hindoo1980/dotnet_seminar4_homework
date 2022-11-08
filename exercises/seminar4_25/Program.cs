@@ -1,13 +1,19 @@
 ﻿//  Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
 
 
-int  checkedVar;
+int  checkedVar1;
+int  checkedVar2;
 bool isInt;
 int  a;
 int  b;
 string msg;
+string fleeMsg;
+string mercyStr;
 
 msg = "сопротивление бесполезно";
+fleeMsg = "то-то же!";
+mercyStr = "пощади";
+
 isInt = false;
 a=0;
 b=0;
@@ -17,6 +23,7 @@ void CheckInput (string a, out bool isInt, out int checkedVar)
      isInt = int.TryParse(a, out checkedVar); 
 }
 
+
 double expAB (int a, int b) //цикл возведения в степень
 {
 
@@ -24,26 +31,19 @@ if (b == 0)
 {
     return 1;
 }
-else if(b > 0) 
-{
-double result = a;
-
-for (int i=1; i < b; i++)
-{
-    result = result*a;
-}
-return result;
-}
 else 
 {
     double result = a;
 
-for (int i=1; i < Math.Abs(b); i++)
+    for (int i=1; i < b; i++)
 {
     result = result*a;
 }
-return 1/result;
+
+return result;
+
 }
+
 }
 
 
@@ -54,12 +54,12 @@ while (isInt == false )
 
    string tmp1 = Console.ReadLine();
 
-     if  (tmp1 != "пощади")
+     if  (tmp1 != mercyStr)
      {
-        CheckInput (tmp1, out isInt, out checkedVar); 
+        CheckInput (tmp1, out isInt, out checkedVar1); 
         if (isInt)
         {
-            a = Convert.ToInt32(tmp1); 
+            a = Convert.ToInt32(checkedVar1); 
         }
         else
         {
@@ -69,7 +69,7 @@ while (isInt == false )
      }
         else
      {
-        Console.WriteLine("то-то же!");
+        Console.WriteLine(fleeMsg);
         return;
      }
    
@@ -77,19 +77,28 @@ while (isInt == false )
 
 isInt = false;
 
-Console.WriteLine("введите показатель степени или просите пощады: ");
+Console.WriteLine("введите натуральный показатель степени или просите пощады: ");
 
-while (isInt == false )
+while (isInt == false)
 {
 
    string tmp2 = Console.ReadLine();
 
-     if  (tmp2 != "пощади")
+     if  (tmp2 != mercyStr)
      {
-        CheckInput (tmp2, out isInt, out checkedVar); 
+        CheckInput (tmp2, out isInt, out checkedVar2); 
         if (isInt)
         {
-             b = Convert.ToInt32(tmp2); 
+             b = Convert.ToInt32(checkedVar2); 
+             if (b > 0)
+             {
+                Console.WriteLine($"{a} в степени {b} равно {expAB (a, b)}");
+             } 
+             else
+             {
+                 Console.WriteLine($"{b} не натуральное число");
+             }   
+             
         }
         else
         {
@@ -99,11 +108,8 @@ while (isInt == false )
      }
         else
      {
-        Console.WriteLine("то-то же!");
+        Console.WriteLine(fleeMsg);
         return;
      }
    
 }
-
-Console.WriteLine($"{a} в степени {b} равно {expAB (a, b)}");
-
