@@ -12,14 +12,14 @@ class work
 static void Main() 
 
 {
-    Console.WriteLine("введите границу поиска простых чисел: ");
-
+    Console.Write("введите границу поиска простых чисел: "); 
+  
     int border = Convert.ToInt32(Console.ReadLine());
 
-    arr_id[] massiv = new arr_id[border];       //создание массива 
+    arr_id[] massiv = new arr_id[border+1];       //создание массива 
     arr_id element = new arr_id();          // элемент типа созданной структуры
-    
-    for (int i = 0; i < massiv.Length - 1 ; i++)
+
+    for (int i = 0; i <= massiv.Length - 1 ; i++)
     
     {
         element.digit = i;
@@ -29,12 +29,12 @@ static void Main()
         massiv[i] = element;  // добавление в массив элемента созданной структуры
     }
     
-    for (int i = 2; i < massiv.Length -1 ; i++)
+    for (int i = 2; i <= massiv.Length -1 ; i++)
     {
 
         if (massiv[i].isIndividible == true)
         {
-            for (int j = 2*i; j < massiv.Length - 1  ; j = j + i)
+            for (int j = 2*i; j <= massiv.Length - 1  ; j = j + i)
             {
                 massiv[j].isIndividible = false;
             }
@@ -42,9 +42,9 @@ static void Main()
         }
     }
 
-
+    Console.WriteLine(" ");
     int k = 0;
-    for (int i = 1; i < massiv.Length -1 ; i++)
+    for (int i = 2; i <= massiv.Length -1 ; i++)
     {
         if (massiv[i].isIndividible == true)
         {
@@ -56,5 +56,6 @@ static void Main()
             }
         }
     }
+    Console.WriteLine(" ");
 }
 }
